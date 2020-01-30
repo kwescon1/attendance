@@ -20,19 +20,19 @@ class LecturersController extends Controller
      //inserting a lecturer into the datatbase
     public function signup(Request $r){
 
-    	return 'Hello World';
+    
 
       		// the validation logic
-      // $messages =['email.required'=> 'Email is required','password.required' =>'Password is required']; //error messages to be displayed 
+      $messages =['email.required'=> 'Email is required','password.required' =>'Password is required']; //error messages to be displayed 
 
-      // $this->validate($r, [
-      //     'email' => 'required|unique:users|email',
-      //     'password' => 'required|alpha_num',
-      //     'firstname' => 'required',
-      //     'lastname'  => 'required',
-      //   ],$messages);
+      $this->validate($r, [
+          'email' => 'required|unique:users|email',
+          'password' => 'required|alpha_num',
+          'firstname' => 'required',
+          'lastname'  => 'required',
+        ],$messages);
  
-      //  return "Hello welcome to Smart <code> Attendance </code>";
+       return "Hello welcome to Smart <code> Attendance </code>";
  
          // $lecturer = Lecturer::create([
          // 			'firstname' => $r['firstname'],
