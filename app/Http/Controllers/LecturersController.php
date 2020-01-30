@@ -20,14 +20,14 @@ class LecturersController extends Controller
      //inserting a lecturer into the datatbase
     public function signup(Request $r){
 
-    
+
 
       		// the validation logic
       $messages =['email.required'=> 'Email is required','password.required' =>'Password is required']; //error messages to be displayed 
 
       $this->validate($r, [
           'email' => 'required|unique:users|email',
-          'password' => 'required|alpha_num',
+          'password' => 'required|alpha_num|max:8',
           'firstname' => 'required',
           'lastname'  => 'required',
         ],$messages);
