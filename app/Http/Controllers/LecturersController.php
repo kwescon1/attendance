@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Lecturer;
 
 class LecturersController extends Controller
+
 {
 
     public function index(){
@@ -20,29 +24,63 @@ class LecturersController extends Controller
      //inserting a lecturer into the datatbase
     public function signup(Request $r){
 
-
-
       		// the validation logic
-      $messages =['email.required'=> 'Email is required','password.required' =>'Password is required']; //error messages to be displayed 
+      $messages =['email.required'=> 'Email is required',
+                  'password.required' =>'Password is required']; //error messages to be displayed 
 
       $this->validate($r, [
-          'email' => 'required|unique:users|email',
-          'password' => 'required|alpha_num|max:8',
+          'email' => 'required|unique:lecturers,email|email',
+          'password' => 'required|alpha_num|max:10',
           'firstname' => 'required',
           'lastname'  => 'required',
         ],$messages);
  
-       return "Hello welcome to Smart <code> Attendance </code>";
- 
-         // $lecturer = Lecturer::create([
-         // 			'firstname' => $r['firstname'],
-         // 			 'lastname' => $r['lastname'],
-         //        	'email' 	=> $r['email'],
-         //        	'password' => Hash::make($r['password'])
-         // 	]);
+       
+             // Inserting the details into the database
+         $lecturer = Lecturer::create([
 
-         // return redirect('/login');
+         			'firstname' => $r['firstname'],
+         			 'lastname' => $r['lastname'],
+                	 'email'    => $r['email'],
+                	'password' => Hash::make($r['password'])
+         	]);
+
+         return redirect('/login');
     }
+
+
+       // Login Script
+       public function login(Request $r){
+
+      $messages =['email.required'=> 'Email is required',
+                  'password.required' =>'Password is required']; //error messages to be displayed 
+
+       $this->validate($r, 
+       		[
+
+          'email' => 'required|email',
+          'password' => 'required|alpha_num|max:10',
+            
+       		], $messages);
+
+       
+
+       		$credentials = $r->only('email','password');
+  				
+  				// Lecturer is logged in here
+       		if (Auth::attempt($credentials)) {
+       			
+      //  			// Auth passed 
+      //  			// Redirect to dashboard
+
+       			return $credentials;
+       		}
+
+       		else {
+       			return back()->withFlash('Incorrect email or password');
+       		} 
+            
+       }
 
    
 }

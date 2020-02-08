@@ -22,3 +22,18 @@ Route::post('/signup', 'LecturersController@signup');
 Route::get('/login', function(){
 	return view('login');
 });
+
+Route::post('/signin','LecturersController@login');
+
+
+Route::get('/dashboard',function(){
+
+      return view('dashboard');
+
+});	
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -3,7 +3,7 @@
 <head>
     <title>Student Attendance | Home </title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('css/custom.css') }}">   
+    <link rel="stylesheet" type="text/css" href="{{ asset ('css/custom.css') }}">
 </head>
 <body style="background-image: url('{{asset('images/smart_1.jpg')}}');">
     <div class="contain">
@@ -25,24 +25,13 @@
                 </div>
             @endif
             
-        <h3 class="section" id="signup-form">Sign Up</h5>
+        <h3 class="section" id="signup-form">Sign In</h5>
         <div class="row">
-            <form action="{{ url('signup') }}" method="POST">
+            <form action="{{ url('signin') }}" method="POST">
               @csrf
-            <div class="form-group">
-                 <label for="firstname">First Name</label>
-                    <input type="text" class="form-control" style="width:400px;" id="firstname" name="firstname" placeholder="firstname">
-                      </div>
-
                       <div class="form-group">
-                         <label for="lastname">Last Name</label>
-                            <input type="text" class="form-control" id="lastname" name ="lastname" placeholder="lastname">
-                                </div>
-
-                       <div class="form-group">
-                         <label for="exampleInputEmail1">Email address</label>
-                           <input type="email" class="form-control" name ="email" id="email" aria-describedby="emailHbklelp" placeholder="Enter email">
-                               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                         <label for="email">Email address</label>
+                           <input type="email" class="form-control" name ="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
                                   </div>
 
                                     <div class="form-group">
@@ -51,7 +40,7 @@
                                  </div>
 
                                
-                  <button type="submit" class="btn btn-primary" name="signup">Sign Up</button>
+                  <button type="submit" class="btn btn-primary" name="signin">Login</button>
                 </form>
             </div>
     </div>
