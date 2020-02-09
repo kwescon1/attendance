@@ -12,13 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/fontawesome-all.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/style.css') }}">
-
-    <!-- scripts -->
-    <script src="{{ asset ('js/jquery.min.js') }}"></script>
-
-    <!-- Custom styles for this template -->
-    <link href="{{asset ('css/dashboard.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/flag-icon.min.css') }}">
 
 </head>
 
@@ -35,15 +30,8 @@
                 </button>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item">
-                            <div id="custom-search" class="top-search-bar">
-                                <input class="form-control" type="text" placeholder="Search..">
-                            </div>
-                        </li>
-                       
-                       
                         <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('images/avatar-1.jpg')}}" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name">John Abraham </h5>
@@ -97,7 +85,11 @@
 
         <!-- wrapper -->
            <div class="dashboard-wrapper">
-            @section('body')
+
+           <div class="dashboard-ecommerce">
+                @yield('body')
+            </div>
+            
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->

@@ -15,10 +15,24 @@ class LecturersController extends Controller
 
 {
 
+	public function __construct(){
+		$this->middleware('auth',['only'=> ['dashboard']]);
+	}
+
     public function index(){
          
         return view('welcome');
 
+    }
+
+    public function dashboard(){
+    	return view('dashboard');
+    }
+
+
+    public function login_page(){
+
+    	return view('login');
     }
 
      //inserting a lecturer into the datatbase

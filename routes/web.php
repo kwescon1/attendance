@@ -15,25 +15,26 @@
 //     return view('welcome');
 // });
 
-Route::get('/', 'LecturersController@index');
+Route::get('/signup', ['uses' => 'LecturersController@index','as' =>'signup_page']);
+
+Route::get('/', function(){
+
+   return view('homepage');
+});
 
 Route::post('/signup', 'LecturersController@signup');
 
-Route::get('/login', function(){
-	return view('login');
-});
+Route::get('/signin', ['uses' => 'LecturersController@login_page', 'as' => 'signin_page']);
 
 Route::post('/signin','LecturersController@login');
 
+Route::get('/dashboard', ['uses'=> 'LecturersController@dashboard']);
 
-Route::get('/dashboard',function(){
-
-      return view('dashboard');
-
-});	
+	
 
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

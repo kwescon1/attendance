@@ -18,3 +18,39 @@ body {
 	margin-top: -10px;
 }
 
+#home_writeup {
+	color: #ffffff;
+	font-size: 45px;
+}
+
+#landing_page_writeup {
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+	margin-top: 180px;
+
+}
+
+#get_started {
+
+	color: #ffffff;
+	font-size: 4em;
+	margin-top: -20px;
+}
+
+/*Responsiveness of the web app*/
+@media only screen and (max-width: 768px) {
+	/* for mobile devices and resizing of the browser windwo*/
+
+		[class *= "col-"] {
+			width:100%;
+		}
+
+		#get_started {font-size: 20px;}
+
+}
+
+#sign {
+	text-decoration: none;
+	color: #ffffff;
+}

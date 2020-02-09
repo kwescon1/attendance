@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Student Attendance | Home </title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('css/custom.css') }}">   
 </head>
-<body style="background-image: url('{{asset('images/smart_1.jpg')}}');">
+<body style="background-image: url('{{asset('images/smart_1.jpg')}}'); background-size: 100%;">
     <div class="contain">
        <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Smart Attendance</a>  
