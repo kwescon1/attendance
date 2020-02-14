@@ -22,19 +22,23 @@ Route::get('/', function(){
    return view('homepage');
 });
 
-Route::post('/signup', 'LecturersController@signup');
+Route::post('/register', 'LecturersController@register');
 
-Route::get('/signin', ['uses' => 'LecturersController@login_page', 'as' => 'signin_page']);
-
-Route::post('/signin','LecturersController@login');
+// Route::get('/signin', ['uses' => 'LecturersController@login_page', 'as' => 'signin_page']);
 
 Route::get('/dashboard', ['uses'=> 'LecturersController@dashboard']);
 
-	
+Route::get('/dashboard/addcourses', function(){
 
+	return view('courses');
 
+})->name('addCourses');
+
+Route::get('/logout', 'LecturersController@logout')->name('logout');
+Route::post('/dashboard/addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);	
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/signin', 'HomeController@index')->name('signin');
 
+Route::post('/signin','LecturersController@login');
