@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-
-use App\Lecturer;
+use App\User;
 
 class LecturersController extends Controller
 
@@ -35,31 +35,34 @@ class LecturersController extends Controller
     	return view('login');
     }
 
+    public function logout (){
+		    Auth::logout();
+		    return redirect("/");  
+    }
+
      //inserting a lecturer into the datatbase
-    public function signup(Request $r){
+    
+    public function register(Request $r){
 
       		// the validation logic
       $messages =['email.required'=> 'Email is required',
                   'password.required' =>'Password is required']; //error messages to be displayed 
 
-      $this->validate($r, [
-          'email' => 'required|unique:lecturers,email|email',
-          'password' => 'required|alpha_num|max:10',
-          'firstname' => 'required',
-          'lastname'  => 'required',
-        ],$messages);
- 
+			      $this->validate($r, [
+			          'email' => 'required|unique:lecturers,email|email',
+			          'password' => 'required|alpha_num|max:10',
+			          'name' => 'required',
+			        ],$messages);
        
              // Inserting the details into the database
-         $lecturer = Lecturer::create([
+			         $user = User::create([
+			         			'name'      => $r['name'],
+			                	 'email'    => $r['email'],
+			                	'password' 	=> Hash::make($r['password']),
+			                	'role_id' 	=> 	'2',
+			         	]);
 
-         			'firstname' => $r['firstname'],
-         			 'lastname' => $r['lastname'],
-                	 'email'    => $r['email'],
-                	'password' => Hash::make($r['password'])
-         	]);
-
-         return redirect('/login');
+			         return redirect('/signin');
     }
 
 
@@ -76,25 +79,49 @@ class LecturersController extends Controller
           'password' => 'required|alpha_num|max:10',
             
        		], $messages);
-
-       
-
-       		$credentials = $r->only('email','password');
   				
-  				// Lecturer is logged in here
-       		if (Auth::attempt($credentials)) {
-       			
-      //  			// Auth passed 
-      //  			// Redirect to dashboard
+  				$credentials = $r->only('email','password');
+                  
+                  if(Auth::attempt($credentials)){
 
-       			return $credentials;
-       		}
+                  	  // Authentication passed, lecturer is now logged in
+                  	   return redirect()->intended('dashboard');
+                  } else {
+                  	return back()->with('Failed','Incorrect email or password');
+                  }
 
-       		else {
-       			return back()->withFlash('Incorrect email or password');
-       		} 
-            
+           }
+
+
+  				// $user = User::where('email', $r->email)->first();
+
+  				// if(!$lecturer)
+  				// 	return back()->with('Failed', 'Incorrect email or password');
+
+  				// if(Hash::check($r->password, $lecturer->password)) {
+  				// 	Auth::login($lecturer);
+  				// 	return redirect()->intended('dashboard');
+  				// }
+  				// else 
+  				// 	return back()->with('Failed', 'Incorrect email or password');
+
+           public function addCourses(Request $r){
+           	$messages =['course_code.required'=> 'Course Code is required and should be in alpha numeric',
+                  'course_name.required' =>'Course Name is required']; //error messages to be displayed 
+
+			       $this->validate($r, 
+			       		[
+
+			          'course_code' => 'required|alpha_num',
+			          'course_name' => 'required',
+			            
+			       		], $messages);
+
+           	return $r;
+
+           }
+
+  				
        }
 
-   
-}
+ 
