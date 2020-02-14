@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
+Auth::routes();
+
 Route::get('/signup', ['uses' => 'LecturersController@index','as' =>'signup_page']);
 
 Route::get('/', function(){
@@ -37,7 +39,6 @@ Route::get('/dashboard/addcourses', function(){
 Route::get('/logout', 'LecturersController@logout')->name('logout');
 Route::post('/dashboard/addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);	
 
-Auth::routes();
 
 Route::get('/signin', 'HomeController@index')->name('signin');
 

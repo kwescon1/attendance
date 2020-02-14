@@ -44,12 +44,13 @@ class LecturersController extends Controller
     
     public function register(Request $r){
 
+
       		// the validation logic
       $messages =['email.required'=> 'Email is required',
                   'password.required' =>'Password is required']; //error messages to be displayed 
 
 			      $this->validate($r, [
-			          'email' => 'required|unique:lecturers,email|email',
+			          'email' => 'required|unique:users,email|email',
 			          'password' => 'required|alpha_num|max:10',
 			          'name' => 'required',
 			        ],$messages);
@@ -111,13 +112,12 @@ class LecturersController extends Controller
 
 			       $this->validate($r, 
 			       		[
-
-			          'course_code' => 'required|alpha_num',
+			          'course_code' => 'required',
 			          'course_name' => 'required',
 			            
 			       		], $messages);
 
-           	return $r;
+           	return $r->all();
 
            }
 

@@ -135,5 +135,7 @@
     <!-- main js -->
     <script src="{{ asset('js/main-js.js') }}"></script>
 
+    @yield('js')
+
 </body>
 </html>
