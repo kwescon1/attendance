@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css')}}">
 
 </head>
 
@@ -34,12 +35,13 @@
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('images/avatar-1.jpg')}}" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">John Abraham </h5>
-                                    <span class="status"></span><span class="ml-2">Available</span>
+                                    @if(Auth::check())
+                                    <h5 class="mb-0 text-white nav-user-name">{{ Auth::user()->name }} </h5>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"><i class="fas fa-unlock mr-2"></i>Logout</a>
+                                    @endif
+                               
                             </div>
                         </li>
                     </ul>
@@ -63,11 +65,18 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link active" href="{{ url('/dashboard') }}"  aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">Dashboard <span class="badge badge-success">6</span></a>
                                 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>UI Elements</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" ><i class="fas fa-user-circle" aria-controls="submenu-2"></i>Students </a>
+                                    <div id="submenu-2" class="collapse submenu">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                 <a class="nav-link" href="#">Registered Students</a>
+                                        </li>
+                                     </ul>
+                                  </div>
                             </li>
                             
                             <li class="nav-item ">
@@ -96,16 +105,10 @@
             <div class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                             Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                        <div class="col-xl-12">
+                             Copyright © 2019 All rights reserved. 
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="#">About</a>
-                                <a href="#">Support</a>
-                                <a href="#">Contact Us</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

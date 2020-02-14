@@ -17,7 +17,7 @@
 		  <div class="container">
 		  	<div class="row">
 		  		<button class="btn btn-danger col-md-6"> <a href="{{ route('signup_page')}}" id="sign">Sign Up</a></button>
-		  			<button class="btn btn-primary col-md-6"> <a href="{{ route('signin_page')}}" id="sign">Sign In</a></button>
+		  			<button class="btn btn-primary col-md-6"> <a href="{{ route('signin')}}" id="sign">Sign In</a></button>
 		  	</div>
 		  </div>
 	</div>

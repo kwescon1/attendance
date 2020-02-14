@@ -27,17 +27,12 @@
             
         <h3 class="section" id="signup-form">Sign Up</h5>
         <div class="row">
-            <form action="{{ url('signup') }}" method="POST">
+            <form action="{{ url('register') }}" method="POST">
               @csrf
             <div class="form-group">
-                 <label for="firstname">First Name</label>
-                    <input type="text" class="form-control" style="width:400px;" id="firstname" name="firstname" placeholder="firstname">
+                 <label for="name">Name</label>
+                    <input type="text" class="form-control" style="width:400px;" id="name" name="name" placeholder="Full Name">
                       </div>
-
-                      <div class="form-group">
-                         <label for="lastname">Last Name</label>
-                            <input type="text" class="form-control" id="lastname" name ="lastname" placeholder="lastname">
-                                </div>
 
                        <div class="form-group">
                          <label for="exampleInputEmail1">Email address</label>
@@ -46,11 +41,14 @@
                                   </div>
 
                                     <div class="form-group">
-                                      <label for="password">Password</label>
+                                      <label for="password-confirm">Password</label>
                                     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                                  </div>
 
-                               
+                                 <div class="form-group">
+                                      <label for="password">Confirm Password</label>
+                                    <input type="password" class="form-control" name="password_confirmation" id="password" placeholder="Confirm password" >
+                                 </div>
                   <button type="submit" class="btn btn-primary" name="signup">Sign Up</button>
                 </form>
             </div>

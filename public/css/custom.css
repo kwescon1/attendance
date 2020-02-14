@@ -54,3 +54,27 @@ body {
 	text-decoration: none;
 	color: #ffffff;
 }
+
+ #dashbutton {
+	display: block; 
+	margin: 20px; 
+	width: 250px; 
+	height: 80px; 
+	background-color: transparent; 
+	color: #000000;
+}
+
+#section {
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 2em;
+}
+
+#courses {
+	text-decoration: none;
+	color: #000000;
+}
+
+.thead {
+
+	font-family: 'Arial','Helvetica',sans-serif;
+}
