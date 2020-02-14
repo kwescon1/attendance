@@ -2,32 +2,33 @@
 
 @section('body')
 
+    <p>
+        <h3 class="section" id="section">
+            Lecturer's dashboard
+        </h3>
+    </p>
+<div class="contain">
+       <div class="row">
+     <div class="items">
+         <button class="btn btn-danger" id="dashbutton"> 
+            <a href="{{ route('addCourses') }}" id="courses"><span><i class="fas fa-book mr-2"></i></span>Add/Remove courses</a> 
+         </button>
+     </div>
+        <div class="items">
+          <button class="btn btn-danger" id="dashbutton"> 
+             <span><i class="fas fa-home mr-2"></i></span>
+               Add/Remove classes
+        </button>
+     </div>
+       <div class="items">
+          <button class="btn btn-danger" id="dashbutton"> 
+             <span><i class="fas fa-cog mr-2"></i></span>
+               Manage Courses
+         </button>
+     </div>
+ </div> 
+    
+    
+</div>
 
-
-    <div class="table-responsive">
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#id</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Edit Image</th>
-                <th>Edit</th>
-                <th>Remove</th>
-            </tr>
-            </thead>
-            <tbody>
-
-       
-
-            </tbody>
-        </table>
-
-       
-
-    </div>
 @endsection
