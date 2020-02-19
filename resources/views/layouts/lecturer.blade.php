@@ -49,7 +49,8 @@
             </nav>
         </div>
         <!-- end of navbar -->
-
+				
+ 
         <!-- left panel of the dashboard -->
              
         <div class="nav-left-sidebar sidebar-dark">
@@ -94,7 +95,7 @@
 
         <!-- wrapper -->
            <div class="dashboard-wrapper">
-
+                
            <div class="dashboard-ecommerce">
                 @yield('body')
             </div>

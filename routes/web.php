@@ -37,9 +37,15 @@ Route::get('/dashboard/addcourses', function(){
 })->name('addCourses');
 
 Route::get('/logout', 'LecturersController@logout')->name('logout');
+
+
 Route::post('/dashboard/addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);	
 
 
 Route::get('/signin', 'HomeController@index')->name('signin');
 
 Route::post('/signin','LecturersController@login');
+
+
+// Returns the courses added
+Route::get('/dashboard/managecourses', ['uses' => 'LecturersController@showCourses', 'as' => 'showCourses']);

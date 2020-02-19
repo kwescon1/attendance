@@ -2,6 +2,7 @@
 
 @section('body')
 	
+	<!-- Add extra fields section -->
 	<div class="container" style="margin: 20px 0px;">
 
    <div class="row">
@@ -64,49 +65,7 @@
                      </div>
                    </td> 
               </tr>
-              <tr>
-                         <td>
-                      <div class="form-group">
-                              <input type="text" class="form-control" required name ="course_code[]"  placeholder="Code" style="width:30%;">
-                       </div>
-                      </td>
-                     <td>
-                      <div class="form-group">
-                              <input type="text" class="form-control" required name ="course_name[]"  placeholder="Name" style="width:50%;">
-                       </div>
-                     </td> 
-               
-              </tr>
-
-              <tr>        
-                    <td>
-                         <div class="form-group">
-                              <input type="text" class="form-control" required name ="course_code[]" placeholder="Code" style="width:30%;">
-                             </div>
-                        </td>
-                     <td>
-                        <div class="form-group">
-                              <input type="text" class="form-control" required name ="course_name[]" placeholder="Name" style="width:50%;">
-                       </div>
-                     </td> 
-              </tr>
-                      
-              <tr>
-                        <td>
-                         <div class="form-group">
-                              <input type="text" class="form-control" required name ="course_code[]" placeholder="Code" style="width:30%;">
-                             </div>
-                        </td>
-
-                        <td>
-                        <div class="form-group">
-                              <input type="text" class="form-control" required name ="course_name[]" placeholder="Name" style="width:50%;">
-                       </div>
-                     </td> 
-
-                     
-
-              </tr> 
+              
             </tbody> 
 
           </table>

@@ -11,7 +11,7 @@
        <div class="row">
      <div class="items">
          <button class="btn btn-danger" id="dashbutton"> 
-            <a href="{{ route('addCourses') }}" id="courses"><span><i class="fas fa-book mr-2"></i></span>Add/Remove courses</a> 
+            <a href="{{ route('addCourses') }}" id="courses"><span><i class="fas fa-book mr-2"></i></span>Add courses</a> 
          </button>
      </div>
         <div class="items">
@@ -22,8 +22,8 @@
      </div>
        <div class="items">
           <button class="btn btn-danger" id="dashbutton"> 
-             <span><i class="fas fa-cog mr-2"></i></span>
-               Manage Courses
+            <a href="{{ route('showCourses') }}" id ="courses"><span><i class="fas fa-cog mr-2"></i></span>
+               Manage Courses</a>    
          </button>
      </div>
  </div> 
