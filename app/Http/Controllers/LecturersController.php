@@ -69,30 +69,30 @@ class LecturersController extends Controller
 
 
        // Login Script
-       public function login(Request $r){
+    public function login(Request $r){
 
-			      $messages =['email.required'=> 'Email is required',
-			                  'password.required' =>'Password is required']; //error messages to be displayed 
+	  	$messages =['email.required'=> 'Email is required',
+	              'password.required' =>'Password is required']; //error messages to be displayed 
 
-       		    	$this->validate($r, 
-		       		[
+    	$this->validate($r, 
+		[
 
-		          'email' => 'required|email',
-		          'password' => 'required|alpha_num|max:10',
-		            
-		       		], $messages);
-		  				
-		  				$credentials = $r->only('email','password');
-		                  
-		                  if(Auth::attempt($credentials)){
+		  'email' => 'required|email',
+		  'password' => 'required|alpha_num|max:10',
+    
+		], $messages);
+				
+		$credentials = $r->only('email','password');
+	          
+	    if(Auth::attempt($credentials)){
 
-		                  	  // Authentication passed, lecturer is now logged in
-		                  	   return redirect()->intended('dashboard');
-		                  } else {
-		                  	return back()->with('error','Incorrect email or password');
-		                  }
+	      	// Authentication passed, lecturer is now logged in
+	      	return redirect()->intended('dashboard');
+	    } else {
+	      	return back()->with('error','Incorrect email or password');
+	    }
 
-           }
+    }
 
 
   				// $user = User::where('email', $r->email)->first();
@@ -107,39 +107,49 @@ class LecturersController extends Controller
   				// else 
   				// 	return back()->with('Failed', 'Incorrect email or password');
 
-           public function addCourses(Request $r){
+    public function addCourses(Request $r){
 
-			          	$messages =['course_code.required'=> 'Course Code is required and should be in alpha numeric',
-			                  		'course_name.required' =>'Course Name is required']; //error messages to be displayed 
+      	$messages =['course_code.required'=> 'Course Code is required and should be in alpha numeric',
+              		'course_name.required' =>'Course Name is required']; //error messages to be displayed 
 
-				       $this->validate($r, 
-				       		[
-				          'course_code' => 'required',
-				          'course_name' => 'required',
-				            
-				       		], $messages);
+       $this->validate($r, 
+       		[
+          'course_code' => 'required',
+          'course_name' => 'required',
+            
+       		], $messages);
 
-				       		$lecturer_id = Auth::id();
-				       			// return $lecturer_id;
-					     // inserting the course details into the courses table
+       	
+	     // inserting the course details into the courses table
 
-				       $course = Course::create([
-				       		'user_id' => Auth::id(),
-				       		'course_code' => json_encode($r['course_code']),
-				       		'course_name' => json_encode($r['course_name']),
 
-				       	]);
+       	for($i=0; $i<count($r->course_code); $i++) {
+       		Course::create([
+       			'user_id' => Auth::id(),
+       			'course_code' => $r->course_code[$i],
+       			'course_name' => $r->course_name[$i]
+       		]);
+       	}
 
-	           		return back()->with('message', 'Course Added Successfuly');
-				       // return $r->all();
-           }
+
+        // $course = Course::create([
+       	// 	'user_id' => Auth::id(),
+       	// 	'course_code' => json_encode($r['course_code']),
+       	// 	'course_name' => json_encode($r['course_name']),
+
+       	// ]);
+
+        return back()->with('message', 'Course Added Successfuly');
+			       // return $r->all();
+    }
  
-       public function showCourses(Request $r){
-       		$courses = Course::get()->all();
+    public function showCourses(Request $r){
+   		$courses = Auth::user()->courses;
 
-  			return view('added_courses',compact("courses"));
-       }
+		return view('added_courses',compact("courses"));
+   	}
+
   				
-       }
+}
 
  
