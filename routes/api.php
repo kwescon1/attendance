@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// Get the number of students in the table
+
+Route::get('/students', ['uses' => 'StudentsController@index']);
+
+
+Route::post('/registerstudent',['uses' => 'StudentsController@studentRegister']);																																														
