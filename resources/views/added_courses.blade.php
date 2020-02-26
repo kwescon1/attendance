@@ -25,7 +25,7 @@
            <tr>
          <td>{{ $course->course_code }}</td>
          <td>{{ $course->course_name }}</td>
-         <td>yeah</td>
+         <td><a href="#" id="courses"><span><i class="fas fa-times mr-2"></i></span></a></td>
          </tr>
       	  @endforeach
 
