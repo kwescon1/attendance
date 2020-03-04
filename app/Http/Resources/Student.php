@@ -14,6 +14,13 @@ class Student extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' =>$this->password,
+            'index' => $this->index,
+            'role_id' => '1'
+        ];
     }
 }

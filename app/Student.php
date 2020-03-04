@@ -10,6 +10,6 @@ class Student extends Model
 
 
     // Specifying the columns to be filled in the students table
-    protected $fillable =['name','index'];
+    protected $fillable =['user_id','index_number'];
 
 }

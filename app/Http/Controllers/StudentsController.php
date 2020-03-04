@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Student;
+use App\User;
 use App\Http\Resources\Student as StudentResource;
+use Validator;
 
 class StudentsController extends Controller
 {
@@ -21,14 +23,31 @@ class StudentsController extends Controller
 
     public function studentRegister(Request $r){
 
+    		$validate = Validator::make($r->all(), [
+    			'index' => 'required|numeric'
+    		]);
+
+    		if($validate->fails())
+    			return $this->results(['message' => $validate->getMessageBag()->first(), 'data' => null], 422);
+
+
+    		$user = User::create([
+    				'name' => $r['name'],
+    				'password' => Hash::make($r['password']),
+    				'email'    => $r['email'],
+    				'role_id'  => '1',
+
+    				]);
+
         		// Registering student
             $student = Student::create([
-
-            		 'name'=> $r['name'],
-            		 'index' => $r['index']
+            		 'user_id'    => $user->id,
+            		 'index_number' => $r['index']
             	]);
 
-    				return new StudentResource($student);
+          return $this->results(['message' => 'registration success', 'data' => new StudentResource($user)]);
+
+    			
     			
     }
 

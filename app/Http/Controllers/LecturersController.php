@@ -20,12 +20,6 @@ class LecturersController extends Controller
 		$this->middleware('auth',['only'=> ['dashboard']]);
 	}
 
-    public function index(){
-         
-        return view('welcome');
-
-    }
-
     public function dashboard(){
     	return view('dashboard');
     }
@@ -42,30 +36,7 @@ class LecturersController extends Controller
     }
 
      //inserting a lecturer into the datatbase
-    
-    public function register(Request $r){
-
-
-      		// the validation logic
-      $messages =['email.required'=> 'Email is required',
-                  'password.required' =>'Password is required']; //error messages to be displayed 
-
-			      $this->validate($r, [
-			          'email' => 'required|unique:users,email|email',
-			          'password' => 'required|alpha_num|max:10',
-			          'name' => 'required',
-			        ],$messages);
-       
-             // Inserting the details into the database
-			         $user = User::create([
-			         			'name'      => $r['name'],
-			                	 'email'    => $r['email'],
-			                	'password' 	=> Hash::make($r['password']),
-			                	'role_id' 	=> 	'2',
-			         	]);
-
-			         return redirect('/signin');
-    }
+  
 
 
        // Login Script
@@ -75,12 +46,12 @@ class LecturersController extends Controller
 	              'password.required' =>'Password is required']; //error messages to be displayed 
 
     	$this->validate($r, 
-		[
+      		[
 
-		  'email' => 'required|email',
-		  'password' => 'required|alpha_num|max:10',
-    
-		], $messages);
+      		  'email' => 'required|email',
+      		  'password' => 'required|alpha_num|max:10',
+          
+      		], $messages);
 				
 		$credentials = $r->only('email','password');
 	          
@@ -123,12 +94,12 @@ class LecturersController extends Controller
 	     // inserting the course details into the courses table
 
 
-       	for($i=0; $i<count($r->course_code); $i++) {
-       		Course::create([
-       			'user_id' => Auth::id(),
-       			'course_code' => $r->course_code[$i],
-       			'course_name' => $r->course_name[$i]
-       		]);
+           	for($i=0; $i<count($r->course_code); $i++) {
+           		Course::create([
+           			'user_id' => Auth::id(),
+           			'course_code' => $r->course_code[$i],
+           			'course_name' => $r->course_name[$i]
+           		]);
        	}
 
 

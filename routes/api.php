@@ -23,4 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/students', ['uses' => 'StudentsController@index']);
 
 
-Route::post('/registerstudent',['uses' => 'StudentsController@studentRegister']);																																														
+Route::post('/registerstudent', 'StudentsController@studentRegister');																																														

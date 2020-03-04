@@ -17,14 +17,14 @@
 
 Auth::routes();
 
-Route::get('/signup', ['uses' => 'LecturersController@index','as' =>'signup_page']);
+Route::get('/signup', ['uses' => 'UsersController@index','as' =>'signup_page']);
 
 Route::get('/', function(){
 
    return view('homepage');
 });
 
-Route::post('/register', 'LecturersController@register');
+Route::post('/register', 'UsersController@register');
 
 // Route::get('/signin', ['uses' => 'LecturersController@login_page', 'as' => 'signin_page']);
 
