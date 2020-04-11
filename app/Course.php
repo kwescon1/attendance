@@ -8,6 +8,10 @@ class Course extends Model
 {
     protected $fillable = [ 'lecturer_id','course_code', 'course_name'];
 
-    public $timestamps = false;
+
+    public function lecturer() {
+
+    	return $this->belongsTo(Lecturer::class);
+    }
 
 }
