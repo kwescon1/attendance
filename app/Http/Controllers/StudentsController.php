@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Student;
+use Illuminate\Support\Facades\Hash;
+use App\Student; 
 use App\User;
 use App\Http\Resources\Student as StudentResource;
 use Validator;
@@ -17,7 +18,7 @@ class StudentsController extends Controller
 
     	$students = Student::get()->all();
 
-    		return StudentResource::collection($students);
+    	return StudentResource::collection($students);
     }
 
 
