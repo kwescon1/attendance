@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Course;
-
+use App\Lecturer;
+use App\Student;
 class LecturersController extends Controller
 
 {
@@ -42,6 +43,7 @@ class LecturersController extends Controller
        // Login Script
     public function login(Request $r){
 
+           
 	  	$messages =['email.required'=> 'Email is required',
 	              'password.required' =>'Password is required']; //error messages to be displayed 
 
@@ -79,24 +81,32 @@ class LecturersController extends Controller
   				// 	return back()->with('Failed', 'Incorrect email or password');
 
     public function addCourses(Request $r){
+              
+        // $lecturer = DB::table('courses')
+        //             ->join('lecturers','lecturers.id','=','courses.lecturer_id')
+        //             ->select('lecturer_id');
+        //             ->get();
+ 
+        $user = Auth()->user()->id;
+        $lecturer = Lecturer::where('user_id',$user)->get('id');
+        $lecturer_id = $lecturer[0]['id'];
 
       	$messages =['course_code.required'=> 'Course Code is required and should be in alpha numeric',
               		'course_name.required' =>'Course Name is required']; //error messages to be displayed 
 
-       $this->validate($r, 
-       		[
-          'course_code' => 'required',
-          'course_name' => 'required',
+                   $this->validate($r, 
+       		           [
+                     'course_code' => 'required',
+                      'course_name' => 'required',
             
-       		], $messages);
+       		           ], $messages);
 
-       	
 	     // inserting the course details into the courses table
 
 
            	for($i=0; $i<count($r->course_code); $i++) {
            		Course::create([
-           			'user_id' => Auth::id(),
+           			'lecturer_id' => $lecturer_id,
            			'course_code' => $r->course_code[$i],
            			'course_name' => $r->course_name[$i]
            		]);
@@ -115,12 +125,34 @@ class LecturersController extends Controller
     }
  
     public function showCourses(Request $r){
-   		$courses = Auth::user()->courses;
+   		$user = Auth::user()->id;
+      $lecturers = Lecturer::where('user_id',$user)->get('id');
+      $lecturer_id = $lecturers[0]['id'];
 
-		return view('added_courses',compact("courses"));
+      $courses = Course::where('lecturer_id',$lecturer_id)->get()->all();
+
+  		return view('added_courses',compact("courses"));
+
    	}
 
-  				
-}
+    
+    public function destroy($id){
 
+           $course = Course::where('id',$id)->first();
+           $course->delete();
+
+
+    return back()->with('success', "Course deleted Successfuly");
+  				
+  } 
+
+    // show the details of the number of students registered
+  public function showStudent(){
+     $students = Student::with('user')->get();
+
+     return view('students',compact("students"));
+
+       }
+
+}
  
