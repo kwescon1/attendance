@@ -49,3 +49,16 @@ Route::post('/signin','LecturersController@login');
 
 // Returns the courses added
 Route::get('/dashboard/managecourses', ['uses' => 'LecturersController@showCourses', 'as' => 'showCourses']);
+
+// Delete a course from the course list
+
+Route::delete('/dashboard/managecourses/delete/{id}', ['uses' => 'LecturersController@destroy', 'as' => 'deleteCourse']);
+
+Route::get('/dashboard/registeredstudents',['uses' => 'LecturersController@showStudent','as' => 'showStudent']);
+
+
+// Qr code example
+Route::get('qr-code-g', function () {
+  	return	QrCode::format('png')->size(400)->generate("123", '../public/images/qrcode.png');
+    
+});
