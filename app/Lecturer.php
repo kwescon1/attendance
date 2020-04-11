@@ -11,4 +11,14 @@ class Lecturer extends Model
 
     public $timestamps = false;
     
+
+    public function courses() {
+
+    	return $this->hasMany(Course::class);
+    }
+
+    public function qr_codes() {
+
+    	return $this->hasMany(Qr_code::class);
+    }
 }

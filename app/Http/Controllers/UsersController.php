@@ -35,7 +35,7 @@ class UsersController extends Controller
              // Inserting the details into the database
 
                 $user = User::create([
-                          'name' => $r['name'],
+                            'name' => $r['name'],
                             'email'    => $r['email'],
                             'password'  => Hash::make($r['password']),
                             'role_id'   =>  '2',
@@ -46,10 +46,6 @@ class UsersController extends Controller
                             'name'    => $r['name'],
                       );
                 Lecturer::insert($data_2);
-
-  			         
-		                
-
 
 			         return redirect('/signin');
     }

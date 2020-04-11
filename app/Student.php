@@ -12,4 +12,11 @@ class Student extends Model
     // Specifying the columns to be filled in the students table
     protected $fillable =['user_id','index_number'];
 
+
+
+    public function user(){
+       return $this->belongsTo(User::class,'user_id');
+    
+    }
+
 }

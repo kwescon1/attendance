@@ -9,4 +9,10 @@ class Qr_code extends Model
     //
 
     protected $fillable = ['image','lecturer_id','course_id'];
+
+
+    public function lecturer() {
+
+    	return $this->belongsTo(Lecturer::class);
+    }
 }

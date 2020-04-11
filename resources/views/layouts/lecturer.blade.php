@@ -74,7 +74,7 @@
                                     <div id="submenu-2" class="collapse submenu">
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
-                                                 <a class="nav-link" href="#">Registered Students</a>
+                                                 <a class="nav-link" href="{{ url( '/dashboard/registeredstudents' ) }}">Registered Students</a>
                                         </li>
                                      </ul>
                                   </div>
@@ -83,9 +83,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Forms</a>
                                
-                            </li>
-                            
-                            
+                            </li>                            
                         </ul>
                     </div>
                 </nav>
