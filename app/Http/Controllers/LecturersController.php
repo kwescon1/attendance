@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Qrcode;
 use App\User;
 use App\Course;
 use App\Lecturer;
 use App\Student;
+use App\Qr_code;
 class LecturersController extends Controller
 
 {
@@ -41,27 +42,22 @@ class LecturersController extends Controller
 
 
        // Login Script
-    public function login(Request $r){
-
-           
-	  	$messages =['email.required'=> 'Email is required',
+       public function login(Request $r){      
+	  	 $messages =['email.required'=> 'Email is required',
 	              'password.required' =>'Password is required']; //error messages to be displayed 
 
-    	$this->validate($r, 
+        	$this->validate($r, 
       		[
-
       		  'email' => 'required|email',
       		  'password' => 'required|alpha_num|max:10',
-          
       		], $messages);
 				
-		$credentials = $r->only('email','password');
-	          
-	    if(Auth::attempt($credentials)){
+    		  $credentials = $r->only('email','password');        
+    	    if(Auth::attempt($credentials)){
 
 	      	// Authentication passed, lecturer is now logged in
 	      	return redirect()->intended('dashboard');
-	    } else {
+	      } else {
 	      	return back()->with('error','Incorrect email or password');
 	    }
 
@@ -69,10 +65,8 @@ class LecturersController extends Controller
 
 
   				// $user = User::where('email', $r->email)->first();
-
   				// if(!$lecturer)
   				// 	return back()->with('Failed', 'Incorrect email or password');
-
   				// if(Hash::check($r->password, $lecturer->password)) {
   				// 	Auth::login($lecturer);
   				// 	return redirect()->intended('dashboard');
@@ -80,17 +74,10 @@ class LecturersController extends Controller
   				// else 
   				// 	return back()->with('Failed', 'Incorrect email or password');
 
-    public function addCourses(Request $r){
-              
-        // $lecturer = DB::table('courses')
-        //             ->join('lecturers','lecturers.id','=','courses.lecturer_id')
-        //             ->select('lecturer_id');
-        //             ->get();
- 
+        public function addCourses(Request $r){ 
         $user = Auth()->user()->id;
         $lecturer = Lecturer::where('user_id',$user)->get('id');
         $lecturer_id = $lecturer[0]['id'];
-
       	$messages =['course_code.required'=> 'Course Code is required and should be in alpha numeric',
               		'course_name.required' =>'Course Name is required']; //error messages to be displayed 
 
@@ -98,7 +85,6 @@ class LecturersController extends Controller
        		           [
                      'course_code' => 'required',
                       'course_name' => 'required',
-            
        		           ], $messages);
 
 	     // inserting the course details into the courses table
@@ -120,39 +106,51 @@ class LecturersController extends Controller
 
        	// ]);
 
-        return back()->with('message', 'Course Added Successfuly');
-			       // return $r->all();
+        return back()->with('message', 'Course Added Successfuly');	 
     }
  
-    public function showCourses(Request $r){
-   		$user = Auth::user()->id;
-      $lecturers = Lecturer::where('user_id',$user)->get('id');
-      $lecturer_id = $lecturers[0]['id'];
-
-      $courses = Course::where('lecturer_id',$lecturer_id)->get()->all();
-
-  		return view('added_courses',compact("courses"));
-
-   	}
+        public function showCourses(Request $r){
+       		$user = Auth::user()->id;
+          $lecturers = Lecturer::where('user_id',$user)->get('id');
+          $lecturer_id = $lecturers[0]['id'];
+          $courses = Course::where('lecturer_id',$lecturer_id)->get()->all();
+    	  	return view('added_courses',compact("courses"));
+       	}
 
     
-    public function destroy($id){
-
-           $course = Course::where('id',$id)->first();
-           $course->delete();
-
-
-    return back()->with('success', "Course deleted Successfuly");
-  				
-  } 
+        public function destroy($id){
+               $course = Course::where('id',$id)->first();
+               $course->delete();
+               return back()->with('success', "Course deleted Successfuly");				
+       } 
 
     // show the details of the number of students registered
-  public function showStudent(){
-     $students = Student::with('user')->get();
+       public function showStudent(){
+           $students = Student::with('user')->get();
+           return view('students',compact("students"));
+         }
 
-     return view('students',compact("students"));
+      public function showcodeform(){  
+        return view('qrcode');
+    }
 
-       }
+      public function generateCode(Request $r){
+        $user = Auth::user()->id;
+        $lecturers = Lecturer::where('user_id',$user)->get('id');
+        $lecturer_id = $lecturers[0]['id'];
+  
+        $name = uniqid().".png";
+        return $name;
+        $uniq_id = $r['course_code'];
+        QrCode::format('png')->size(400)->generate($uniq_id, '../public/images/codes/'.$name);
+        Qr_code::create([
+        'lecturer_id' => $lecturer_id,
+        'image'       => $name,
+        'course_id'   => $course_code,  
+        ]);
+
+       return back()->with('success','code generated successfully');
+  }
 
 }
  

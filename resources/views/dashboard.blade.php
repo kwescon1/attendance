@@ -15,7 +15,7 @@
 </div>
    <div class="items">
       <button class="btn btn-danger" id="dashbutton"> 
-          <a href="" id="courses">
+          <a href="{{route('showQrcode') }}" id="courses">
              <span><i class="fas fa-home mr-2"></i></span> </a>
                Generate code
         </button>
