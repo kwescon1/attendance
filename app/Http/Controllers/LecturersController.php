@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Qrcode;
+// use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use QrCode;
 use App\User;
 use App\Course;
 use App\Lecturer;
@@ -108,7 +109,7 @@ class LecturersController extends Controller
 
         return back()->with('message', 'Course Added Successfuly');	 
     }
- 
+        
         public function showCourses(Request $r){
        		$user = Auth::user()->id;
           $lecturers = Lecturer::where('user_id',$user)->get('id');
@@ -134,20 +135,25 @@ class LecturersController extends Controller
         return view('qrcode');
     }
 
+
       public function generateCode(Request $r){
         $user = Auth::user()->id;
         $lecturers = Lecturer::where('user_id',$user)->get('id');
         $lecturer_id = $lecturers[0]['id'];
-  
+        $courses = Course::where('lecturer_id',$lecturer_id)->get();
+ 
+        return view('qrcode',compact("courses"));
+
         $name = uniqid().".png";
-        return $name;
         $uniq_id = $r['course_code'];
         QrCode::format('png')->size(400)->generate($uniq_id, '../public/images/codes/'.$name);
+        
         Qr_code::create([
         'lecturer_id' => $lecturer_id,
         'image'       => $name,
-        'course_id'   => $course_code,  
+        'course_id'   => $uniq_id,  
         ]);
+       
 
        return back()->with('success','code generated successfully');
   }

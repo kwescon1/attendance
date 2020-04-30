@@ -17,8 +17,13 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="course_code">Enter Course Code</label>
-                                                    <input type="text" name="course_code" id="course_code" class="form-control" required="">
+                                                    <label for="course_code">Select Course</label>
+                                                      <select name="course_code" id="course_code" class="form-control" required="">
+                                                      
+                                                      		@foreach($courses as $course)
+                                                      			<option>{{ $course->course_code}}</option>
+                                                      		@endforeach
+                                                      </select>
                                                 </div>
                                             </div>
 
