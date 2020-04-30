@@ -14,7 +14,7 @@ class Lecturer extends Model
 
     public function courses() {
 
-    	return $this->hasMany(Course::class);
+    	return $this->hasMany(Course::class, 'lecturer_id');
     }
 
     public function qr_codes() {

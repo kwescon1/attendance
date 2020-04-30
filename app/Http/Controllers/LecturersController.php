@@ -111,10 +111,8 @@ class LecturersController extends Controller
     }
         
         public function showCourses(Request $r){
-       		$user = Auth::user()->id;
-          $lecturers = Lecturer::where('user_id',$user)->get('id');
-          $lecturer_id = $lecturers[0]['id'];
-          $courses = Course::where('lecturer_id',$lecturer_id)->get()->all();
+       		$lecturer = Auth::user()->lecturer;
+          $courses = $lecturer->courses()->orderBy('created_at', 'desc')->get();
     	  	return view('added_courses',compact("courses"));
        	}
 
@@ -132,7 +130,8 @@ class LecturersController extends Controller
          }
 
       public function showcodeform(){  
-        return view('qrcode');
+        $courses = Auth::user()->lecturer->courses()->orderBy('created_at', 'desc')->get();
+        return view('qrcode', compact('courses'));
     }
 
 

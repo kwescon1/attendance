@@ -44,4 +44,9 @@ class User extends Authenticatable
 
     public $timestamps = false;
 
+
+    public function lecturer() {
+        return $this->hasOne(Lecturer::class, 'user_id');
+    }
+
 }
