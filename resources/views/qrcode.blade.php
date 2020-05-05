@@ -21,7 +21,7 @@
                                                       <select name="course_code" id="course_code" class="form-control" required="">
                                                       
                                                       		@foreach($courses as $course)
-                                                      			<option>{{ $course->course_code}}</option>
+                                                      			<option value="{{$course->id}}">{{ $course->course_code}}</option>
                                                       		@endforeach
                                                       </select>
                                                 </div>

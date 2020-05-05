@@ -136,19 +136,14 @@ class LecturersController extends Controller
 
 
       public function generateCode(Request $r){
-        $user = Auth::user()->id;
-        $lecturers = Lecturer::where('user_id',$user)->get('id');
-        $lecturer_id = $lecturers[0]['id'];
-        $courses = Course::where('lecturer_id',$lecturer_id)->get();
- 
-        return view('qrcode',compact("courses"));
-
+        $lecturer = Auth::user()->lecturer;
+    
         $name = uniqid().".png";
         $uniq_id = $r['course_code'];
         QrCode::format('png')->size(400)->generate($uniq_id, '../public/images/codes/'.$name);
         
         Qr_code::create([
-        'lecturer_id' => $lecturer_id,
+        'lecturer_id' => $lecturer->id,
         'image'       => $name,
         'course_id'   => $uniq_id,  
         ]);
