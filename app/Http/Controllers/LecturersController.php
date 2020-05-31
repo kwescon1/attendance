@@ -14,7 +14,7 @@ class LecturersController extends Controller
 {
 
 	public function __construct(){
-		$this->middleware('auth',['only'=> ['dashboard']]);
+
 	}
 
     public function dashboard(){
@@ -28,8 +28,8 @@ class LecturersController extends Controller
     }
 
     public function logout (){
-		    Auth::logout();
-		    return redirect("/");
+        Auth::logout();
+        return redirect("/");
     }
 
      //inserting a lecturer into the datatbase

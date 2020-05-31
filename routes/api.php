@@ -24,14 +24,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/students', ['uses' => 'StudentsController@index']);
 
 
-
 Route::post('register', 'Api\ApiController@register');
 Route::post('login', 'Api\ApiController@login');
 
 Route::group(['middleware' => ['auth:api', 'student'], 'namespace' => 'Api'], function() {
 
     Route::post('records', 'ApiController@recordAttendance');
-
     Route::get('records', 'ApiController@getAllAttendances');
 
 });

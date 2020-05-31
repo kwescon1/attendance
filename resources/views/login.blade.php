@@ -8,8 +8,8 @@
 <body style="background-image: url('{{asset('images/smart_1.jpg')}}'); background-size: 100%;">
     <div class="contain">
        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Smart Attendance</a>  
-         </nav>    
+  <a class="navbar-brand" href="#">Smart Attendance</a>
+         </nav>
        </div>
 
     <div class="container-fluid" id="signup-form-box">
@@ -24,10 +24,10 @@
                     </ul>
                 </div>
             @endif
-            
-        <h3 class="section" id="signup-form">Sign In</h5>
+
+        <h3 class="section" id="signup-form">Sign In</h3>
         <div class="row">
-            <form action="{{ url('signin') }}" method="POST">
+            <form action="{{ url('login') }}" method="POST">
               @csrf
                       <div class="form-group">
                          <label for="email">Email address</label>
@@ -39,7 +39,7 @@
                                     <input type="password" class="form-control" name="password" id="password" placeholder="Password" style="width: 200%;">
                                  </div>
 
-                               
+
                   <button type="submit" class="btn btn-primary col-md-8 offset-md-8" name="signin">Login</button>
                 </form>
             </div>
