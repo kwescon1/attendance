@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +43,7 @@ Route::get('/dashboard/addcourses', function(){
 Route::get('/logout', 'LecturersController@logout')->name('logout');
 
 
-Route::post('/dashboard/addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);	
+Route::post('/dashboard/addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);
 
 
 Route::get('/signin', 'HomeController@index')->name('signin');
