@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Response;
 
-class AuthorizeLecturer
+class AuthorizeStudent
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,7 @@ class AuthorizeLecturer
      */
     public function handle($request, Closure $next)
     {
-
-        if(auth()->user()->isLecturer())
+        if(auth()->user()->isStudent())
             return $next($request);
 
         return response("Forbidden", Response::HTTP_FORBIDDEN);

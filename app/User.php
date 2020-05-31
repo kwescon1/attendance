@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -65,11 +66,20 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if user is admin
+     * Check if user is lecturer
      *
      * @return boolean
      */
     public function isLecturer() {
         return $this->role_id == 2;
+    }
+
+    /**
+     * Check if user is student
+     *
+     * @return boolean
+     */
+    public function isStudent() {
+        return $this->role_id == 1;
     }
 }

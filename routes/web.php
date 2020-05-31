@@ -30,40 +30,44 @@ Route::get('/', function(){
 
 Route::post('/register', 'UsersController@register');
 
-// Route::get('/signin', ['uses' => 'LecturersController@login_page', 'as' => 'signin_page']);
-
-Route::get('/dashboard', ['uses'=> 'LecturersController@dashboard']);
-
-Route::get('/dashboard/addcourses', function(){
-
-	return view('courses');
-
-})->name('addCourses');
-
-Route::get('/logout', 'LecturersController@logout')->name('logout');
-
-
-Route::post('/dashboard/addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);
-
-
 Route::get('/signin', 'HomeController@index')->name('signin');
 
 Route::post('/signin','LecturersController@login');
 
+// Route::get('/signin', ['uses' => 'LecturersController@login_page', 'as' => 'signin_page']);
+
+Route::get('/logout', 'LecturersController@logout')->name('logout');
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'lecturer'], function() {
+
+    Route::get('/', ['uses'=> 'LecturersController@dashboard']);
+
+    Route::get('addcourses', function(){
+
+        return view('courses');
+
+    })->name('addCourses');
+
+    Route::post('addcourses', ['uses' => 'LecturersController@addCourses', 'as' => 'addCourses']);
+
 
 // Returns the courses added
-Route::get('/dashboard/managecourses', ['uses' => 'LecturersController@showCourses', 'as' => 'showCourses']);
+    Route::get('managecourses', ['uses' => 'LecturersController@showCourses', 'as' => 'showCourses']);
 
 // Delete a course from the course list
 
-Route::delete('/dashboard/managecourses/delete/{id}', ['uses' => 'LecturersController@destroy', 'as' => 'deleteCourse']);
+    Route::delete('managecourses/delete/{id}', ['uses' => 'LecturersController@destroy', 'as' => 'deleteCourse']);
 
-Route::get('/dashboard/registeredstudents',['uses' => 'LecturersController@showStudent','as' => 'showStudent']);
+    Route::get('registeredstudents',['uses' => 'LecturersController@showStudent','as' => 'showStudent']);
 
 
 // view qrcode form
-Route::get('/dashboard/generatecode', ['uses'=> 'LecturersController@showcodeform', 'as' => 'showQrcode']);
+    Route::get('generatecode', 'LecturersController@showcodeform')->name('showQrcode');
 
 // generate code here
-Route::post('/dashboard/generatecode',['uses'=> 'LecturersController@generateCode', 'as' => 'qrCode']);
+    Route::post('generatecode',['uses'=> 'LecturersController@generateCode', 'as' => 'qrCode']);
 
+    Route::get('qr-codes', 'LecturersController@listQrCodes')->name('qrcodes.list');
+
+
+});

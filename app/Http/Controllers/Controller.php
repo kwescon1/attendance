@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
@@ -13,9 +14,9 @@ class Controller extends BaseController
 
     public function results($data, $code=200) {
     	$status = "";
-    	if($code == 200)
+    	if($code == Response::HTTP_OK)
     		$status = "success";
-    	else if($code == 401)
+    	else if($code == Response::HTTP_UNAUTHORIZED)
     		$status = "unauthorized";
     	else
     		$status = "error";

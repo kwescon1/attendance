@@ -21,7 +21,7 @@
 <body>
 
     <div class="dashboard-main-wrapper">
-        
+
         <!-- navbar -->
       <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
@@ -41,7 +41,7 @@
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"><i class="fas fa-unlock mr-2"></i>Logout</a>
                                     @endif
-                               
+
                             </div>
                         </li>
                     </ul>
@@ -49,10 +49,10 @@
             </nav>
         </div>
         <!-- end of navbar -->
-				
- 
+
+
         <!-- left panel of the dashboard -->
-             
+
         <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -67,7 +67,7 @@
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link active" href="{{ url('/dashboard') }}"  aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">Dashboard <span class="badge badge-success">6</span></a>
-                                
+
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" ><i class="fas fa-user-circle" aria-controls="submenu-2"></i>Students </a>
@@ -79,13 +79,30 @@
                                      </ul>
                                   </div>
                             </li>
-                            
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" ><i class="fas fa-qrcode" aria-controls="submenu-2"></i>QR Codes </a>
+                                <div id="submenu-3" class="collapse submenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route( 'showQrcode' ) }}">Generate</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route( 'qrcodes.list' ) }}">List</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
                             <li class="nav-item ">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Forms</a>
-                               
-                            </li>                            
+
+                            </li>
                         </ul>
                     </div>
+
+
+
                 </nav>
             </div>
         </div>
@@ -93,11 +110,11 @@
 
         <!-- wrapper -->
            <div class="dashboard-wrapper">
-                
+
            <div class="dashboard-ecommerce">
                 @yield('body')
             </div>
-            
+
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -105,9 +122,9 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-12">
-                             Copyright © 2019 All rights reserved. 
+                             Copyright © 2019 All rights reserved.
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -115,10 +132,10 @@
             <!-- end footer -->
             <!-- ============================================================== -->
         </div>
-           
+
     </div>
         <!-- end of wrapper -->
-   
+
 
 
 
