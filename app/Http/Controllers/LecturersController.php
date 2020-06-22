@@ -32,7 +32,7 @@ class LecturersController extends Controller
         return redirect("/");
     }
 
-     //inserting a lecturer into the datatbase
+    
 
 
 
@@ -50,7 +50,7 @@ class LecturersController extends Controller
     		  $credentials = $r->only('email','password');
     	    if(Auth::attempt($credentials)){
 
-	      	// Authentication passed, lecturer is now logged in
+          // Authentication passed, lecturer is now logged in
 	      	return redirect()->intended('dashboard');
 	      } else {
 	      	return back()->with('error','Incorrect email or password');
@@ -110,7 +110,7 @@ class LecturersController extends Controller
     	  	return view('added_courses',compact("courses"));
        	}
 
-
+    //    deleting a course
         public function destroy($id){
                $course = Course::where('id',$id)->first();
                $course->delete();

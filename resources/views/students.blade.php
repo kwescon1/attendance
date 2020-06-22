@@ -1,4 +1,5 @@
 @extends('layouts.lecturer')
+@include('alerts.alerts')
 
 @section('body')
  

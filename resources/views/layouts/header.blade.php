@@ -33,7 +33,12 @@
 
   <!-- Custom stlylesheet -->
   <link type="text/css" rel="stylesheet" href="{{ asset ('css/style.css') }}" />
-
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/sweetalert.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/vendors.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/app.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu-modern.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+  
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

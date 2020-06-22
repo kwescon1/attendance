@@ -4,4 +4,7 @@
     <div class="container-fluid">
        @yield('body')
     </div>
+    
+    @yield('js')
 </body>	
+</html>

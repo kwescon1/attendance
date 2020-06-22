@@ -7,7 +7,7 @@
 
 </head>
 
-<body style="background-image: url('{{asset('images/smart_5.jpg')}}'); background-repeat: repeat-y; background-size: 100%;">
+<body style="background-image: url('{{asset('images/smart_5.jpg')}}'); background-repeat: no-repeat; background-size: 100%;">
    <div class="container-fluid">
    	 <div class="row">
 		<div class="col-xl-12" id="landing_page_writeup">

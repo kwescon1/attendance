@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// Get the number of students in the table
+// Get the number of registered students in the system
 
 Route::get('/students', ['uses' => 'StudentsController@index']);
 

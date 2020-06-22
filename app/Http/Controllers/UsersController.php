@@ -47,6 +47,6 @@ class UsersController extends Controller
                       );
                 Lecturer::insert($data_2);
 
-			         return redirect('/signin');
+			         return redirect('/login');
     }
 }

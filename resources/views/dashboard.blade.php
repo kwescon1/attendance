@@ -1,5 +1,4 @@
 @extends('layouts.lecturer')
-
 @section('body')
     <p>
         <h3 class="section" id="section">

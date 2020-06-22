@@ -1,10 +1,7 @@
 @extends('layouts.lecturer')
-
 @section('body')
-	
 	<!-- Add extra fields section -->
 	<div class="container" style="margin: 20px 0px;">
-
    <div class="row">
      <div class="col-md-8">
         <h2 style="font-family: Arial;">Add Courses</h2>
@@ -19,58 +16,36 @@
          </div>
        </div>
      </div>
-   </div>
-
-    	 <!-- Code to display error messages in registering -->
-                        @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            
-  
-   
-      <!-- <table class="table table-striped"> -->
-        
+   </div> 
+   @include('alerts.alerts')  
+    <!-- <table class="table table-striped"> -->
       <!-- <tbody> -->
-
         <!-- beginning of form -->
         <form action="{{ route('addCourses') }}" method="POST" name="courses"> 
-               @csrf
-
-         <div class="table-responsive">
-          <table class="table table-striped">
-
-            <thead>
-              <tr>
+          @csrf
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
                 <th style="font-family: 'Arial';">Course Code</th>
-                <th style="font-family: 'Arial';">Course Name</th>  
-              </tr>
-            </thead>
-            
-             <tbody class="fields">
-              <tr>          
-                  <td>
-                       <div class="form-group">
-                            <input type="text" class="form-control" required name ="course_code[]"  placeholder="Code" style="width:30%;">
-                           </div>
+              <th style="font-family: 'Arial';">Course Name</th>  
+            </tr>
+          </thead>
+        <tbody class="fields">
+          <tr>          
+             <td>
+                <div class="form-group">
+                   <input type="text" class="form-control" required name ="course_code[]"  placeholder="Code" style="width:30%;">
+                      </div>
                         </td>
-                    <td>
+                      <td>
                    <div class="form-group">
-                       <input type="text" class="form-control" required name ="course_name[]"  placeholder="Name" style="width:50%;">
-                     </div>
-                   </td> 
+                 <input type="text" class="form-control" required name ="course_name[]"  placeholder="Name" style="width:50%;">
+                </div>
+               </td> 
               </tr>
-              
             </tbody> 
-
           </table>
-         
-
           <tr>
             <td colspan="2">
               <div class="form-group" align="center">

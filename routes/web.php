@@ -59,6 +59,10 @@ Route::group(['middleware' => ['auth', 'lecturer']], function() {
 
         Route::get('qr-codes', 'LecturersController@listQrCodes')->name('qrcodes.list');
 
+
+        ///////test
+        Route::post('/testdelete/{id}', 'LecturersController@destroy');
+
     });
 
 });
