@@ -17,6 +17,7 @@ class CreateQrCodesTable extends Migration
             $table->bigIncrements('id');
             $table->string('image');
             $table->unsignedBigInteger('lecturer_id');
+            $table->time('time');
 
             $table->foreign('lecturer_id')
                   ->references('id')

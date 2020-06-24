@@ -5,18 +5,24 @@
     <title>Lecturers | Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    
+
 
     <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
     <!-- bootstrap -->
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/fontawesome-all.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/fontawesome-all.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('fonts/css/flag-icon.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
 
 
 
@@ -64,14 +70,14 @@
                               <ul class="navbar-nav flex-column">
                                   <li class="nav-divider">Menu</li>
                                       <li class="nav-item ">
-                                        <a class="nav-link active" href="{{ url('/dashboard') }}"  aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">Dashboard <span class="badge badge-success">6</span></a>
+                                      <a class="nav-link {{ Request::is('dashboard') ? "active": "" }}" href="{{ url('/dashboard') }}"  aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1">Dashboard <span class="badge badge-success">6</span></a>
                                         </li>
                                       <li class="nav-item">
                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" ><i class="fas fa-user-circle" aria-controls="submenu-2"></i>Students </a>
                                 <div id="submenu-2" class="collapse submenu">
                              <ul class="nav flex-column">
                           <li class="nav-item">
-                       <a class="nav-link" href="{{ url( '/dashboard/registeredstudents' ) }}">Registered Students</a>
+                       <a class="nav-link {{ Request::is('dashboard/registeredstudents') ? "active": "" }}" href="{{ url( '/dashboard/registeredstudents' ) }}">Registered Students</a>
                     </li>
                  </ul>
              </div>
@@ -81,17 +87,17 @@
        <div id="submenu-3" class="collapse submenu">
           <ul class="nav flex-column">
              <li class="nav-item">
-               <a class="nav-link" href="{{ route( 'showQrcode' ) }}">Generate</a>
+               <a class="nav-link {{ Request::is('dashboard/generatecode') ? "active": "" }}" href="{{ route( 'showQrcode' ) }}">Generate</a>
                   </li>
                     <li class="nav-item">
-                       <a class="nav-link" href="{{ route( 'qrcodes.list' ) }}">List</a>
+                       <a class="nav-link {{ Request::is('dashboard/qr-codes') ? "active": "" }}" href="{{ route( 'qrcodes.list' ) }}">List</a>
                          </li>
                             </ul>
                               </div>
                                 </li>
-                                  <li class="nav-item ">
+                                {{--<li class="nav-item ">
                                 <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Forms</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </nav>

@@ -32,7 +32,7 @@ class LecturersController extends Controller
         return redirect("/");
     }
 
-    
+
 
 
 
@@ -83,8 +83,6 @@ class LecturersController extends Controller
        		           ], $messages);
 
 	     // inserting the course details into the courses table
-
-
            	for($i=0; $i<count($r->course_code); $i++) {
            		Course::create([
            			'lecturer_id' => $lecturer_id,
@@ -130,20 +128,33 @@ class LecturersController extends Controller
 
 
     public function generateCode(Request $r){
+
+        // return $r->all();
+
+        $this->validate($r, [
+            'time' => 'required|date_format:H:i',
+            'course_code' => 'required|exists:qr_codes,id'
+        ]);
+
+
+
         $lecturer = Auth::user()->lecturer;
 
         $name = uniqid().".png";
-        $uniq_id = $r['course_code'];
-        QrCode::format('png')->size(400)->generate($uniq_id, '../public/images/codes/'.$name);
+
+        $id = Qr_code::all()->last()->id;
+
+        QrCode::format('png')->size(400)->generate((string)++$id, '../public/images/codes/'.$name);
 
         Qr_code::create([
         'lecturer_id' => $lecturer->id,
         'image'       => $name,
-        'course_id'   => $uniq_id,
+        'course_id'   => $r['course_code'],
+        'time' =>  $r['time']
         ]);
 
 
-       return back()->with('success','code generated successfully');
+       return redirect('dashboard/qr-code');
     }
 
     /**
@@ -152,10 +163,39 @@ class LecturersController extends Controller
      * @return Object
      */
     public function listQrCodes() {
-        $qr_codes = auth()->user()->lecturer->qr_codes;
 
-        return $qr_codes;
+        $qr_codes = auth()->user()->lecturer->qr_codes()->orderBy('created_at', 'desc')->get();
+        return view('qrcodes.generated',compact('qr_codes'));
     }
+
+    /**
+     *show generated qr code
+     *
+     */
+    public function showGeneratedCode() {
+
+        $code = auth()->user()->lecturer->qr_codes()->get()->last();
+
+        return view('qrcodes.show', compact('code'));
+    }
+
+
+    public function showStudents($id) {
+
+        $code = Qr_code::find($id);
+
+        if(!$code) {
+            return back()->with('error', 'qr code not found');
+        }
+
+        $records = $code->records()->present()->get();
+
+        return view('qrcodes.students', compact('records', 'code'));
+
+
+    }
+
+
 
 
 }

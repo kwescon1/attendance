@@ -26,7 +26,7 @@ class ApiController extends Controller
      */
     public function register(Request $r) {
         $validate = Validator::make($r->all(), [
-            'index' => 'required|numeric|unique:students,index_number',
+            'index' => 'required|numeric|unique:students,index_number,digits:7',
             'name' =>  ['required', 'string'],
             'password' => ['required', 'string'],
             'email'    => ['required', 'email', 'unique:users'],
@@ -98,21 +98,34 @@ class ApiController extends Controller
         if (!$qr_code)
             return $this->results(['message' => 'qr code not found', 'data' => null], Response::HTTP_NOT_FOUND);
 
-        if ($qr_code->created_at->toDateString() != now()->toDateString())
-            return $this->results(['message' => 'access denied', 'data' => null], Response::HTTP_FORBIDDEN);
+        // return () ? "true" :"false";
 
-        $student = auth()->user()->student;
+        // return date("H:i", strtotime($qr_code->time));
 
-        if (Record::where(['student_id' => $student->id, 'qr_code_id' => $qr_code->id])->exists()) {
-            return $this->results(['message' => 'attendance already taken', 'data' => null]);
+        if($qr_code->created_at->toDateString() == now()->toDateString()) {
+
+            if(now()->toTimeString() <= date("H:i", strtotime($qr_code->time))) {
+
+                $student = auth()->user()->student;
+
+                if (Record::where(['student_id' => $student->id, 'qr_code_id' => $qr_code->id])->exists()) {
+                    return $this->results(['message' => 'attendance already taken', 'data' => null]);
+                }
+
+                $student->records()->create([
+                    'qr_code_id' => $r['qr_code'],
+                    'recorded' => 1
+                ]);
+
+                return $this->results(['message' => 'attendance recorded', 'data' => null]);
+            }
         }
 
-        $student->records()->create([
-            'qr_code_id' => $r['qr_code'],
-            'recorded' => 1
-        ]);
 
-        return $this->results(['message' => 'attendance recorded', 'data' => null]);
+        return $this->results(['message' => 'access denied', 'data' => null], Response::HTTP_FORBIDDEN);
+
+
+
 
     }
 

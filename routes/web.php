@@ -28,7 +28,7 @@ Route::get('/', function(){
 Route::get('/register', ['uses' => 'UsersController@index','as' =>'signup_page']);
 Route::post('/register', 'UsersController@register');
 
-Route::get('login', 'LecturersController@login_page');
+Route::get('login', 'LecturersController@login_page')->name('login');
 Route::post('/login','LecturersController@login');
 
 
@@ -59,9 +59,13 @@ Route::group(['middleware' => ['auth', 'lecturer']], function() {
 
         Route::get('qr-codes', 'LecturersController@listQrCodes')->name('qrcodes.list');
 
+        Route::get('qr-codes/{id}', 'LecturersController@showStudents')->name('qrcode.show');
+
+        Route::get('qr-code', 'LecturersController@showGeneratedCode');
+
 
         ///////test
-        Route::post('/testdelete/{id}', 'LecturersController@destroy');
+        // Route::post('/testdelete/{id}', 'LecturersController@destroy');
 
     });
 

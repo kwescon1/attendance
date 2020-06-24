@@ -30,4 +30,24 @@ class Record extends Model
     public function student() {
         return $this->belongsTo(Student::class, 'student_id');
     }
+
+     /**
+     * Scope - returns query of number of students present
+     *
+     * @return Builder
+     */
+    public function scopePresent($query) {
+        return $query->where('recorded', 1);
+
+    }
+
+    /**
+     * get the present attribute
+     *
+     * @return string
+     */
+
+    public function getPresentAttribute() {
+        return $this->recorded == 1 ? "Yes" : "No";
+    }
 }

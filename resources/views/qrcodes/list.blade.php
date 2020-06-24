@@ -1,11 +1,11 @@
 @extends('layouts.lecturer')
 
 @section('body')
- 
+
 <div class="content-body"><!-- Simple User Cards -->
             <section id="configuration">
                 <div class="row">
-                    <div class="col-md-6 col-xs-12" style="margin: auto"> <br>	
+                    <div class="col-md-6 col-xs-12" style="margin: auto"> <br>
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Generate Code</h4>
@@ -19,11 +19,18 @@
                                                 <div class="form-group">
                                                     <label for="course_code">Select Course</label>
                                                       <select name="course_code" id="course_code" class="form-control" required="">
-                                                      
+
                                                       		@foreach($courses as $course)
                                                       			<option value="{{$course->id}}">{{ $course->course_code}}</option>
                                                       		@endforeach
                                                       </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="time">Ends At</label>
+                                                      <input type="time" class="form-control" name="time">
                                                 </div>
                                             </div>
 
